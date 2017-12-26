@@ -5,16 +5,14 @@
     <meta charset="utf-8">
     <title>MDC Toolbar Demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="/images/logo_components_color_2x_web_48dp.png">
+    <!--<link rel="icon" type="image/png" href="/images/logo_components_color_2x_web_48dp.png">//-->
     <!--<link rel="stylesheet" href="node_modules/material-components-web/dist/material-components-web.css">//-->
     <link rel="stylesheet" href="https://unpkg.com/material-components-web@0.27.0/dist/material-components-web.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="css/style.css">
     <style>
-    .mdc-toolbar-demo {
-        margin: 0px;
-    }
 /*
     .mdc-toolbar__row:first-child::after {
         background-image: url("../images/4-3.jpg");
@@ -35,7 +33,7 @@
     </style>
 </head>
 
-<body class="mdc-typography mdc-toolbar-demo">
+<body class="mdc-toolbar-demo">
     <header class="mdc-toolbar mdc-toolbar--fixed mdc-toolbar--waterfall mdc-toolbar--flexible mdc-toolbar--flexible-default-behavior">
         <div class="mdc-toolbar__row">
             <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
@@ -123,12 +121,14 @@
     document.querySelector('.demo-menu').addEventListener('click', function() {
         drawer.open = true;
     });
+    /*
     drawerEl.addEventListener('MDCTemporaryDrawer:open', function() {
         console.log('Received MDCTemporaryDrawer:open');
     });
     drawerEl.addEventListener('MDCTemporaryDrawer:close', function() {
         console.log('Received MDCTemporaryDrawer:close');
     });
+    */
     </script>
 </body>
 
