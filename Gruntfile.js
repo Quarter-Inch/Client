@@ -13,6 +13,7 @@ module.exports = function(grunt) {
                     { 'src/js/react/LayoutGrid.js': 'src/js/react/jsx/LayoutGrid.jsx' },
                     { 'src/js/react/LayoutGridCell.js': 'src/js/react/jsx/LayoutGridCell.jsx' },
                     { 'src/js/react/Card.js': 'src/js/react/jsx/Card.jsx' },
+                    { 'src/js/react/TextField.js': 'src/js/react/jsx/TextField.jsx' },
                 ]
             }
         },

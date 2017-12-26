@@ -18971,7 +18971,9 @@ var Drawer = require('./Drawer.js');
 var Card = require('./Card.js');
 var LayoutGrid = require('./LayoutGrid.js');
 var LayoutGridCell = require('./LayoutGridCell.js');
+var TextField = require('./TextField.js');
 
+// https://material.io/components/
 ReactDOM.render(React.createElement(
 	'div',
 	null,
@@ -18996,18 +18998,37 @@ ReactDOM.render(React.createElement(
 			React.createElement(
 				LayoutGridCell,
 				null,
-				React.createElement(Card, null)
-			),
-			React.createElement(
-				LayoutGridCell,
-				null,
-				'Hello'
+				React.createElement(
+					'div',
+					{ className: 'mdc-form-field' },
+					React.createElement(
+						'div',
+						{ className: 'mdc-checkbox' },
+						React.createElement('input', { type: 'checkbox', id: 'my-checkbox', className: 'mdc-checkbox__native-control' }),
+						React.createElement(
+							'div',
+							{ className: 'mdc-checkbox__background' },
+							React.createElement(
+								'svg',
+								{ className: 'mdc-checkbox__checkmark', viewBox: '0 0 24 24' },
+								React.createElement('path', { className: 'mdc-checkbox__checkmark__path', fill: 'none', stroke: 'white', d: 'M1.73,12.91 8.1,19.28 22.79,4.59' })
+							),
+							React.createElement('div', { className: 'mdc-checkbox__mixedmark' })
+						)
+					),
+					React.createElement(
+						'label',
+						{ htmlFor: 'my-checkbox', id: 'my-checkbox-label' },
+						'This is my checkbox'
+					)
+				),
+				React.createElement(TextField, { id: 'context-input', type: 'text', label: 'Context URL', placeholder: 'https://', required: true, pattern: '.{8,}' })
 			)
 		)
 	)
 ), document.getElementById('App'));
 
-},{"./Card.js":30,"./Drawer.js":31,"./HeaderToolbar.js":32,"./LayoutGrid.js":33,"./LayoutGridCell.js":34,"react":28,"react-dom":25}],30:[function(require,module,exports){
+},{"./Card.js":30,"./Drawer.js":31,"./HeaderToolbar.js":32,"./LayoutGrid.js":33,"./LayoutGridCell.js":34,"./TextField.js":35,"react":28,"react-dom":25}],30:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -19298,6 +19319,81 @@ module.exports = createReactClass({
             'div',
             { className: 'mdc-layout-grid__cell' },
             this.props.children
+        );
+    }
+});
+
+},{"create-react-class":2,"react":28}],35:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var createReactClass = require('create-react-class');
+
+module.exports = createReactClass({
+    displayName: 'exports',
+
+    getInitialState: function getInitialState() {
+        return {
+            value: this.props.value
+        };
+    },
+    componentWillMount: function componentWillMount() {},
+    componentDidMount: function componentDidMount() {
+        // DOM に追加されたとき
+        if (this.props.id) {
+            var c = '.mdc-text-field-' + this.props.id;
+            console.log(c);
+            mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field-' + this.props.id));
+        }
+    },
+    onChange: function onChange(e) {
+        this.setState({
+            value: e.target.value
+        });
+    },
+    render: function render() {
+        var classes = ['mdc-text-field', 'mdc-text-field--upgraded'];
+
+        var id;
+        if (this.props.id) {
+            id = this.props.id;
+            classes.push('mdc-text-field-' + id);
+        }
+
+        var placeholder = null;
+        var labelClasses = ['mdc-text-field__label'];
+        if (this.props.placeholder) {
+            placeholder = this.props.placeholder;
+        }
+
+        if (this.state.value || this.props.placeholder) {
+            labelClasses.push('mdc-text-field__label--float-above');
+        }
+
+        var label = null;
+        if (this.props.label) {
+            label = React.createElement(
+                'label',
+                { htmlFor: id, className: labelClasses.join(' ') },
+                this.props.label
+            );
+        }
+
+        return React.createElement(
+            'div',
+            null,
+            React.createElement(
+                'div',
+                { className: classes.join(" ") },
+                React.createElement('input', { pattern: this.props.pattern, type: this.props.type, className: 'mdc-text-field__input', id: id, 'aria-controls': id + "-validation-msg", value: this.state.value, placeholder: placeholder, required: this.props.required, onChange: this.onChange }),
+                label,
+                React.createElement('div', { className: 'mdc-text-field__bottom-line' })
+            ),
+            React.createElement(
+                'p',
+                { className: 'mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg', id: id + "-validation-msg" },
+                'Must be at least 8 characters long'
+            )
         );
     }
 });
