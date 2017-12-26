@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>MDC Toolbar Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/images/logo_components_color_2x_web_48dp.png">
+    <!--<link rel="stylesheet" href="node_modules/material-components-web/dist/material-components-web.css">//-->
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@0.27.0/dist/material-components-web.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+    .mdc-toolbar-demo {
+        margin: 0px;
+    }
+/*
+    .mdc-toolbar__row:first-child::after {
+        background-image: url("../images/4-3.jpg");
+        background-size: cover;
+        background-position: center;
+    }
+*/
+    .demo-paragraph {
+        margin: 0px;
+        padding: 20px 28px;
+    }
+
+    @media (max-width: 599px) {
+        .demo-paragraph {
+            padding: 16px;
+        }
+    }
+    </style>
+</head>
+
+<body class="mdc-typography mdc-toolbar-demo">
+    <header class="mdc-toolbar mdc-toolbar--fixed mdc-toolbar--waterfall mdc-toolbar--flexible mdc-toolbar--flexible-default-behavior">
+        <div class="mdc-toolbar__row">
+            <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+                <button class="demo-menu material-icons mdc-toolbar__menu-icon">menu</button>
+                <span class="mdc-toolbar__title catalog-title">Temporary Drawer</span>
+            </section>
+        </div>
+    </header>
+    <aside class="mdc-temporary-drawer">
+        <nav class="mdc-temporary-drawer__drawer">
+            <header class="mdc-temporary-drawer__header">
+                <div class="mdc-temporary-drawer__header-content mdc-theme--primary-bg mdc-theme--text-primary-on-primary">
+                    Header here
+                </div>
+            </header>
+            <nav class="mdc-temporary-drawer__content mdc-list-group">
+                <div id="icon-with-text-demo" class="mdc-list">
+                    <a class="mdc-list-item mdc-temporary-drawer--selected" href="#">
+              <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">inbox</i>Inbox
+            </a>
+                    <a class="mdc-list-item" href="#">
+              <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">star</i>Star
+            </a>
+                    <a class="mdc-list-item" href="#">
+              <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">send</i>Sent Mail
+            </a>
+                    <a class="mdc-list-item" href="#">
+              <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">drafts</i>Drafts
+            </a>
+                </div>
+                <hr class="mdc-list-divider">
+                <div class="mdc-list">
+                    <a class="mdc-list-item" href="#">
+              <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">email</i>All Mail
+            </a>
+                    <a class="mdc-list-item" href="#">
+              <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">delete</i>Trash
+            </a>
+                    <a class="mdc-list-item" href="#">
+              <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">report</i>Spam
+            </a>
+                </div>
+            </nav>
+        </nav>
+    </aside>
+    <main>
+        <div class="mdc-toolbar-fixed-adjust">
+            <p class="demo-paragraph">
+                Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est.
+            </p>
+            <p class="demo-paragraph">
+                Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est.
+            </p>
+            <p class="demo-paragraph">
+                Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est.
+            </p>
+        </div>
+    </main>
+    <script type="text/javascript">
+    (function() {
+        var pollId = 0;
+        pollId = setInterval(function() {
+            var pos = getComputedStyle(document.querySelector('.mdc-toolbar')).position;
+            if (pos === 'fixed' || pos === 'relative') {
+                init();
+                clearInterval(pollId);
+            }
+        }, 250);
+
+        function init() {
+            var toolbar = mdc.toolbar.MDCToolbar.attachTo(document.querySelector('.mdc-toolbar'));
+            toolbar.fixedAdjustElement = document.querySelector('.mdc-toolbar-fixed-adjust');
+        }
+    })();
+    </script>
+    <!-- <script src="node_modules/material-components-web/dist/material-components-web.js"></script> //-->
+    <script src="https://unpkg.com/material-components-web@0.27.0/dist/material-components-web.js"></script>
+    <script>
+    mdc.autoInit()
+    </script>
+    <script>
+    var drawerEl = document.querySelector('.mdc-temporary-drawer');
+    var MDCTemporaryDrawer = mdc.drawer.MDCTemporaryDrawer;
+    var drawer = new MDCTemporaryDrawer(drawerEl);
+    document.querySelector('.demo-menu').addEventListener('click', function() {
+        drawer.open = true;
+    });
+    drawerEl.addEventListener('MDCTemporaryDrawer:open', function() {
+        console.log('Received MDCTemporaryDrawer:open');
+    });
+    drawerEl.addEventListener('MDCTemporaryDrawer:close', function() {
+        console.log('Received MDCTemporaryDrawer:close');
+    });
+    </script>
+</body>
+
+</html>
