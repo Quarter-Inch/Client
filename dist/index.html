@@ -42,43 +42,10 @@
             </p>
         </div>
     </main>
-    <script type="text/javascript">
-    (function() {
-        var pollId = 0;
-        pollId = setInterval(function() {
-            var pos = getComputedStyle(document.querySelector('.mdc-toolbar')).position;
-            if (pos === 'fixed' || pos === 'relative') {
-                init();
-                clearInterval(pollId);
-            }
-        }, 250);
-
-        function init() {
-            var toolbar = mdc.toolbar.MDCToolbar.attachTo(document.querySelector('.mdc-toolbar'));
-            toolbar.fixedAdjustElement = document.querySelector('.mdc-toolbar-fixed-adjust');
-        }
-    })();
-    </script>
     <!-- <script src="node_modules/material-components-web/dist/material-components-web.js"></script> //-->
     <script src="https://unpkg.com/material-components-web@0.27.0/dist/material-components-web.js"></script>
     <script>
     mdc.autoInit()
-    </script>
-    <script>
-    var drawerEl = document.querySelector('.mdc-temporary-drawer');
-    var MDCTemporaryDrawer = mdc.drawer.MDCTemporaryDrawer;
-    var drawer = new MDCTemporaryDrawer(drawerEl);
-    document.querySelector('.demo-menu').addEventListener('click', function() {
-        drawer.open = true;
-    });
-    /*
-    drawerEl.addEventListener('MDCTemporaryDrawer:open', function() {
-        console.log('Received MDCTemporaryDrawer:open');
-    });
-    drawerEl.addEventListener('MDCTemporaryDrawer:close', function() {
-        console.log('Received MDCTemporaryDrawer:close');
-    });
-    */
     </script>
     <script src="js/QuaterInch-Client.js"></script>
 </body>

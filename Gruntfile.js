@@ -9,7 +9,10 @@ module.exports = function(grunt) {
                 files: [
                     { 'src/js/react/AppEntry.js': 'src/js/react/jsx/AppEntry.jsx' },
                     { 'src/js/react/HeaderToolbar.js': 'src/js/react/jsx/HeaderToolbar.jsx' },
-                    { 'src/js/react/Drawer.js': 'src/js/react/jsx/Drawer.jsx' }
+                    { 'src/js/react/Drawer.js': 'src/js/react/jsx/Drawer.jsx' },
+                    { 'src/js/react/LayoutGrid.js': 'src/js/react/jsx/LayoutGrid.jsx' },
+                    { 'src/js/react/LayoutGridCell.js': 'src/js/react/jsx/LayoutGridCell.jsx' },
+                    { 'src/js/react/Card.js': 'src/js/react/jsx/Card.jsx' },
                 ]
             }
         },

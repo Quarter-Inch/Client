@@ -18968,16 +18968,108 @@ var ReactDOM = require('react-dom');
 
 var HeaderToolbar = require('./HeaderToolbar.js');
 var Drawer = require('./Drawer.js');
+var Card = require('./Card.js');
+var LayoutGrid = require('./LayoutGrid.js');
+var LayoutGridCell = require('./LayoutGridCell.js');
 
 ReactDOM.render(React.createElement(
 	'div',
 	null,
-	React.createElement(HeaderToolbar, null),
+	React.createElement(HeaderToolbar, { img: 'https://placehold.jp/150x150.png', adjust: '.toolbar-fixed-adjust' }),
 	React.createElement(Drawer, null),
-	'Hello'
+	React.createElement(
+		'main',
+		{ className: 'toolbar-fixed-adjust' },
+		React.createElement(
+			LayoutGrid,
+			null,
+			React.createElement(
+				LayoutGridCell,
+				null,
+				React.createElement(Card, { img: 'https://placehold.jp/150x150.png' })
+			),
+			React.createElement(
+				LayoutGridCell,
+				null,
+				React.createElement(Card, null)
+			),
+			React.createElement(
+				LayoutGridCell,
+				null,
+				React.createElement(Card, null)
+			),
+			React.createElement(
+				LayoutGridCell,
+				null,
+				'Hello'
+			)
+		)
+	)
 ), document.getElementById('App'));
 
-},{"./Drawer.js":30,"./HeaderToolbar.js":31,"react":28,"react-dom":25}],30:[function(require,module,exports){
+},{"./Card.js":30,"./Drawer.js":31,"./HeaderToolbar.js":32,"./LayoutGrid.js":33,"./LayoutGridCell.js":34,"react":28,"react-dom":25}],30:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var createReactClass = require('create-react-class');
+
+module.exports = createReactClass({
+  displayName: 'exports',
+
+  render: function render() {
+    var media = null;
+    if (this.props.img) {
+      var mediaStyles = {
+        backgroundImage: 'url("' + this.props.img + '")',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center center',
+        height: '12.313rem'
+      };
+      media = React.createElement('section', { style: mediaStyles });
+    }
+    return React.createElement(
+      'div',
+      { className: 'mdc-card' },
+      media,
+      React.createElement(
+        'section',
+        { className: 'mdc-card__primary' },
+        React.createElement(
+          'h1',
+          { className: 'mdc-card__title mdc-card__title--large' },
+          '\u30AB\u30FC\u30C9'
+        ),
+        React.createElement(
+          'h2',
+          { className: 'mdc-card__subtitle' },
+          '\u30B5\u30D6\u30BF\u30A4\u30C8\u30EB'
+        )
+      ),
+      React.createElement(
+        'section',
+        { className: 'mdc-card__supporting-text' },
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+      ),
+      React.createElement(
+        'section',
+        { className: 'mdc-card__actions' },
+        React.createElement(
+          'button',
+          { className: 'mdc-button mdc-button--compact mdc-card__action' },
+          'Action 1'
+        ),
+        React.createElement(
+          'button',
+          { className: 'mdc-button mdc-button--compact mdc-card__action' },
+          'Action 2'
+        )
+      )
+    );
+  }
+});
+
+},{"create-react-class":2,"react":28}],31:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -19100,7 +19192,7 @@ module.exports = createReactClass({
     }
 });
 
-},{"create-react-class":2,"react":28}],31:[function(require,module,exports){
+},{"create-react-class":2,"react":28}],32:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -19109,10 +19201,45 @@ var createReactClass = require('create-react-class');
 module.exports = createReactClass({
     displayName: 'exports',
 
+    getInitialState: function getInitialState() {
+        return {
+            pollId: 0,
+            toolbar: null
+        };
+    },
+    componentDidMount: function componentDidMount() {
+        // DOM に追加されたとき
+        var self = this;
+        this.setState({
+            pollId: setInterval(function () {
+                var pos = getComputedStyle(document.querySelector('.mdc-toolbar')).position;
+                if (pos === 'fixed' || pos === 'relative') {
+                    self.init();
+                    clearInterval(self.state.pollId);
+                }
+            }, 250),
+            toolbar: mdc.toolbar.MDCToolbar.attachTo(document.querySelector('.mdc-toolbar'))
+        });
+        this.init();
+    },
+    init: function init() {
+        if (this.props.adjust && this.state.toolbar) {
+            this.state.toolbar.fixedAdjustElement = document.querySelector(this.props.adjust);
+        }
+    },
     render: function render() {
+        var style = null;
+        if (this.props.img) {
+            style = {
+                backgroundImage: 'url("' + this.props.img + '")',
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center center'
+            };
+        }
         return React.createElement(
             'header',
-            { className: 'mdc-toolbar mdc-toolbar--fixed mdc-toolbar--waterfall mdc-toolbar--flexible mdc-toolbar--flexible-default-behavior' },
+            { className: 'mdc-toolbar mdc-toolbar--fixed mdc-toolbar--waterfall mdc-toolbar--flexible mdc-toolbar--flexible-default-behavior', style: style },
             React.createElement(
                 'div',
                 { className: 'mdc-toolbar__row' },
@@ -19131,6 +19258,46 @@ module.exports = createReactClass({
                     )
                 )
             )
+        );
+    }
+});
+
+},{"create-react-class":2,"react":28}],33:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var createReactClass = require('create-react-class');
+
+module.exports = createReactClass({
+	displayName: 'exports',
+
+	render: function render() {
+		return React.createElement(
+			'div',
+			{ className: 'mdc-layout-grid' },
+			React.createElement(
+				'div',
+				{ className: 'mdc-layout-grid__inner' },
+				this.props.children
+			)
+		);
+	}
+});
+
+},{"create-react-class":2,"react":28}],34:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var createReactClass = require('create-react-class');
+
+module.exports = createReactClass({
+    displayName: 'exports',
+
+    render: function render() {
+        return React.createElement(
+            'div',
+            { className: 'mdc-layout-grid__cell' },
+            this.props.children
         );
     }
 });
