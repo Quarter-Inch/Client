@@ -14,6 +14,18 @@ var LayoutGridCell = require('./LayoutGridCell.js');
 var Oauth2Card = require('./Oauth2Card.js');
 
 // https://material.io/components/
+
+(function() {
+    var arg = new Object;
+    var pair = location.search.substring(1).split('&');
+    for (var i = 0; pair[i]; i++) {
+        var kv = pair[i].split('=');
+        arg[kv[0]] = kv[1];
+    }
+    console.log('arg');
+    console.log(arg);
+}());
+
 ReactDOM.render(
 	<div>
 		<HeaderToolbar img="https://placehold.jp/150x150.png" adjust=".toolbar-fixed-adjust"/>
