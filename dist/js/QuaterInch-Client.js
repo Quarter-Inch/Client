@@ -19688,13 +19688,12 @@ var Dispatcher = require('flux').Dispatcher;
 var dispatcher = new Dispatcher();
 
 var Action = {
-	init:function(){
-		dispatcher.dispatch({
+    init: function() {
+        dispatcher.dispatch({
             actionType: "init",
-            value: {
-            }
+            value: {}
         });
-	},
+    },
     authentication: function(clientId, clientSecret, authorizeEndpoint, tokenEndpoint, scope) {
         dispatcher.dispatch({
             actionType: "authentication",
@@ -19715,12 +19714,12 @@ var AuthStrage = function() {
         localStorage.setItem(name, JSON.stringify(value));
     }
 
-    function _load(name){
-    	var val = localStorage.getItem(name);
-    	if(val){
-    		return JSON.parse(val);
-    	}
-    	return null;
+    function _load(name) {
+        var val = localStorage.getItem(name);
+        if (val) {
+            return JSON.parse(val);
+        }
+        return null;
     }
 
     return {
@@ -19738,36 +19737,36 @@ var myStrage = AuthStrage();
 var Store = assign({}, EventEmitter.prototype, {
     dispatcherIndex: dispatcher.register(function(payload) {
         switch (payload.actionType) {
-        	case "init":
-			    var arg = new Object;
-			    var pair = location.search.substring(1).split('&');
-			    for (var i = 0; pair[i]; i++) {
-			        var kv = pair[i].split('=');
-			        arg[kv[0]] = kv[1];
-			    }
+            case "init":
+                var arg = new Object;
+                var pair = location.search.substring(1).split('&');
+                for (var i = 0; pair[i]; i++) {
+                    var kv = pair[i].split('=');
+                    arg[kv[0]] = kv[1];
+                }
 
-			    var setting = myStrage.load("authentication");
+                var setting = myStrage.load("authentication");
 
-			    if(arg.code && setting){
-					$.ajax({
-					    url: setting.tokenEndpoint,
-					    type: "POST",
-					    data : {
-					    	grant_type : 'authorization_code',
-					    	code : arg.code,
-					    	redirect_uri : 'https://quarter-inch.github.io/Client/dist/index.html',
-					    }
-					}).success(function(data) {
-					    console.log(data);
-					    
-					}).error(function(data) {
-					    
-					});
-			    }
+                if (arg.code && setting) {
+                    $.ajax({
+                        url: setting.tokenEndpoint,
+                        type: "POST",
+                        data: {
+                            grant_type: 'authorization_code',
+                            code: arg.code,
+                            redirect_uri: 'https://quarter-inch.github.io/Client/dist/index.html',
+                        }
+                    }).done(function(data) {
+                        console.log(data);
+                        
+                    }).fail(function(data) {
+                        console.log(data);
+                    });
+                }
 
 
 
-        		break;
+                break;
 
             case "authentication":
                 myStrage.save("authentication", payload.value);
