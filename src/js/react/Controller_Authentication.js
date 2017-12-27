@@ -67,6 +67,7 @@ var Store = assign({}, EventEmitter.prototype, {
                     $.ajax({
                         url: setting.tokenEndpoint,
                         type: "POST",
+                        cache : false,
                         data: {
                             grant_type: 'authorization_code',
                             code: arg.code,
