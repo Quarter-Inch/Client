@@ -19745,11 +19745,26 @@ var Store = assign({}, EventEmitter.prototype, {
 			        var kv = pair[i].split('=');
 			        arg[kv[0]] = kv[1];
 			    }
-			    console.log('arg');
-			    console.log(arg);
 
 			    var setting = myStrage.load("authentication");
-			    console.log(setting);
+
+			    if(arg.code && setting){
+					$.ajax({
+					    url: setting.tokenEndpoint,
+					    type: "POST",
+					    data : {
+					    	grant_type : 'authorization_code',
+					    	code : arg.code,
+					    	redirect_uri : 'https://quarter-inch.github.io/Client/dist/index.html',
+					    }
+					}).success(function(data) {
+					    console.log(data);
+					    
+					}).error(function(data) {
+					    
+					});
+			    }
+
 
 
         		break;
