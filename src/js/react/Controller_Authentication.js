@@ -37,6 +37,7 @@ var Strage = function() {
         var kv = pair[i].split('=');
         arg[kv[0]] = kv[1];
     }
+    console.log('arg');
     console.log(arg);
 }());
 
