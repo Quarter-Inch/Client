@@ -13,7 +13,13 @@ module.exports = function(grunt) {
                     { 'src/js/react/LayoutGrid.js': 'src/js/react/jsx/LayoutGrid.jsx' },
                     { 'src/js/react/LayoutGridCell.js': 'src/js/react/jsx/LayoutGridCell.jsx' },
                     { 'src/js/react/Card.js': 'src/js/react/jsx/Card.jsx' },
+                    { 'src/js/react/CardTitle.js': 'src/js/react/jsx/CardTitle.jsx' },
+                    { 'src/js/react/CardText.js': 'src/js/react/jsx/CardText.jsx' },
+                    { 'src/js/react/CardAction.js': 'src/js/react/jsx/CardAction.jsx' },
+                    { 'src/js/react/CardActionButton.js': 'src/js/react/jsx/CardActionButton.jsx' },
                     { 'src/js/react/TextField.js': 'src/js/react/jsx/TextField.jsx' },
+                    { 'src/js/react/OAuth2Form.js': 'src/js/react/jsx/OAuth2Form.jsx' },
+                    { 'src/js/react/Oauth2Card.js': 'src/js/react/jsx/Oauth2Card.jsx' }
                 ]
             }
         },

@@ -6,9 +6,13 @@ var ReactDOM = require('react-dom');
 var HeaderToolbar = require('./HeaderToolbar.js');
 var Drawer = require('./Drawer.js');
 var Card = require('./Card.js');
+var CardTitle = require('./CardTitle.js');
+var CardText = require('./CardText.js');
+var CardAction = require('./CardAction.js');
+var CardActionButton = require('./CardActionButton.js');
 var LayoutGrid = require('./LayoutGrid.js');
 var LayoutGridCell = require('./LayoutGridCell.js');
-var TextField = require('./TextField.js');
+var Oauth2Card = require('./Oauth2Card.js');
 
 // https://material.io/components/
 ReactDOM.render(React.createElement(
@@ -25,41 +29,21 @@ ReactDOM.render(React.createElement(
 			React.createElement(
 				LayoutGridCell,
 				null,
-				React.createElement(Card, { img: 'https://placehold.jp/150x150.png' })
-			),
-			React.createElement(
-				LayoutGridCell,
-				null,
-				React.createElement(Card, null)
-			),
-			React.createElement(
-				LayoutGridCell,
-				null,
 				React.createElement(
-					'div',
-					{ className: 'mdc-form-field' },
+					Card,
+					{ img: 'https://placehold.jp/150x150.png' },
+					React.createElement(CardTitle, { title: 'Title', 'sub-title': 'Sub Title' }),
 					React.createElement(
-						'div',
-						{ className: 'mdc-checkbox' },
-						React.createElement('input', { type: 'checkbox', id: 'my-checkbox', className: 'mdc-checkbox__native-control' }),
-						React.createElement(
-							'div',
-							{ className: 'mdc-checkbox__background' },
-							React.createElement(
-								'svg',
-								{ className: 'mdc-checkbox__checkmark', viewBox: '0 0 24 24' },
-								React.createElement('path', { className: 'mdc-checkbox__checkmark__path', fill: 'none', stroke: 'white', d: 'M1.73,12.91 8.1,19.28 22.79,4.59' })
-							),
-							React.createElement('div', { className: 'mdc-checkbox__mixedmark' })
-						)
-					),
-					React.createElement(
-						'label',
-						{ htmlFor: 'my-checkbox', id: 'my-checkbox-label' },
-						'This is my checkbox'
+						CardText,
+						null,
+						'CardText'
 					)
-				),
-				React.createElement(TextField, { id: 'context-input', type: 'text', label: 'Context URL', placeholder: 'https://', required: true, pattern: '.{8,}' })
+				)
+			),
+			React.createElement(
+				LayoutGridCell,
+				null,
+				React.createElement(Oauth2Card, null)
 			)
 		)
 	)
