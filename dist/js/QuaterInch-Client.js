@@ -19769,7 +19769,8 @@ var Store = assign({}, EventEmitter.prototype, {
                             grant_type: 'authorization_code',
                             code: arg.code,
                             redirect_uri: 'https://quarter-inch.github.io/Client/dist/index.html',
-                        }
+                        },
+                        crossDomain: true
                     }).done(function(data) {
                         console.log(data);
 
