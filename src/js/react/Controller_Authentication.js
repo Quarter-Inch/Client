@@ -84,6 +84,8 @@ var Store = assign({}, EventEmitter.prototype, {
                         data: {
                             grant_type: 'authorization_code',
                             code: arg.code,
+                            client_id : setting.clientId,
+                            client_secret : setting.clientSecret,
                             redirect_uri: 'https://quarter-inch.github.io/Client/dist/index.html',
                         },
                         crossDomain: true
