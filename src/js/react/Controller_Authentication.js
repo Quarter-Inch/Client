@@ -88,7 +88,8 @@ var Store = assign({}, EventEmitter.prototype, {
                             client_secret : setting.clientSecret,
                             redirect_uri: 'https://quarter-inch.github.io/Client/dist/index.html',
                         },
-                        crossDomain: true
+                        crossDomain: true,
+                        dataType:"json"
                     }).done(function(data) {
                         console.log(data);
 
