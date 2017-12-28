@@ -15,11 +15,13 @@ module.exports = createReactClass({
   displayName: 'exports',
 
   getInitialState: function getInitialState() {
+    var value = ControllerAuthentication.Store.getAuthenticationValue();
+    //console.log(15, value);
     return {
-      clientId: "",
-      clientSecret: "",
-      authorizeEndpoint: "",
-      tokenEndpoint: "",
+      clientId: value.clientId,
+      clientSecret: value.clientSecret,
+      authorizeEndpoint: value.authorizeEndpoint,
+      tokenEndpoint: value.tokenEndpoint,
       scope: "any"
     };
   },
@@ -43,7 +45,7 @@ module.exports = createReactClass({
       React.createElement(
         CardText,
         null,
-        React.createElement(OAuth2Form, { onChange: this.onChange })
+        React.createElement(OAuth2Form, { onChange: this.onChange, clientId: this.state.clientId, clientSecret: this.state.clientSecret, authorizeEndpoint: this.state.authorizeEndpoint, tokenEndpoint: this.state.tokenEndpoint })
       ),
       React.createElement(
         CardAction,

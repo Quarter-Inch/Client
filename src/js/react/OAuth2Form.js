@@ -9,10 +9,10 @@ module.exports = createReactClass({
 
     getInitialState: function getInitialState() {
         return {
-            clientId: "",
-            clientSecret: "",
-            authorizeEndpoint: "",
-            tokenEndpoint: ""
+            clientId: this.props.clientId,
+            clientSecret: this.props.clientSecret,
+            authorizeEndpoint: this.props.authorizeEndpoint,
+            tokenEndpoint: this.props.tokenEndpoint
         };
     },
     onClientIdChange: function onClientIdChange(e) {
@@ -53,6 +53,7 @@ module.exports = createReactClass({
         }
     },
     render: function render() {
+        console.log(this.state);
         return React.createElement(
             'div',
             null,

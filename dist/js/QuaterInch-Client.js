@@ -19735,6 +19735,19 @@ var myStrage = AuthStrage();
 
 
 var Store = assign({}, EventEmitter.prototype, {
+    getAuthenticationValue: function() {
+        var value = myStrage.load("authentication");
+        if (value) {
+            return value;
+        }
+        return {
+            clientId: "5BZwkNfjpbgZ1cwCXh89xyfrLf4u9T3V",
+            clientSecret: "hIceCTVKxzZ5dDijzoYQinIr",
+            authorizeEndpoint: "https://karasuma-oike-888.questetra.net/oauth2/authorize",
+            tokenEndpoint: "https://karasuma-oike-888.questetra.net/oauth2/token",
+            scope: "any"
+        }
+    },
     dispatcherIndex: dispatcher.register(function(payload) {
         switch (payload.actionType) {
             case "init":
@@ -19751,7 +19764,7 @@ var Store = assign({}, EventEmitter.prototype, {
                     $.ajax({
                         url: setting.tokenEndpoint,
                         type: "POST",
-                        cache : false,
+                        cache: false,
                         data: {
                             grant_type: 'authorization_code',
                             code: arg.code,
@@ -19759,7 +19772,7 @@ var Store = assign({}, EventEmitter.prototype, {
                         }
                     }).done(function(data) {
                         console.log(data);
-                        
+
                     }).fail(function(data) {
                         console.log(data);
                     });
@@ -20033,10 +20046,10 @@ module.exports = createReactClass({
 
     getInitialState: function getInitialState() {
         return {
-            clientId: "",
-            clientSecret: "",
-            authorizeEndpoint: "",
-            tokenEndpoint: ""
+            clientId: this.props.clientId,
+            clientSecret: this.props.clientSecret,
+            authorizeEndpoint: this.props.authorizeEndpoint,
+            tokenEndpoint: this.props.tokenEndpoint
         };
     },
     onClientIdChange: function onClientIdChange(e) {
@@ -20077,6 +20090,7 @@ module.exports = createReactClass({
         }
     },
     render: function render() {
+        console.log(this.state);
         return React.createElement(
             'div',
             null,
@@ -20106,11 +20120,13 @@ module.exports = createReactClass({
   displayName: 'exports',
 
   getInitialState: function getInitialState() {
+    var value = ControllerAuthentication.Store.getAuthenticationValue();
+    //console.log(15, value);
     return {
-      clientId: "",
-      clientSecret: "",
-      authorizeEndpoint: "",
-      tokenEndpoint: "",
+      clientId: value.clientId,
+      clientSecret: value.clientSecret,
+      authorizeEndpoint: value.authorizeEndpoint,
+      tokenEndpoint: value.tokenEndpoint,
       scope: "any"
     };
   },
@@ -20134,7 +20150,7 @@ module.exports = createReactClass({
       React.createElement(
         CardText,
         null,
-        React.createElement(OAuth2Form, { onChange: this.onChange })
+        React.createElement(OAuth2Form, { onChange: this.onChange, clientId: this.state.clientId, clientSecret: this.state.clientSecret, authorizeEndpoint: this.state.authorizeEndpoint, tokenEndpoint: this.state.tokenEndpoint })
       ),
       React.createElement(
         CardAction,

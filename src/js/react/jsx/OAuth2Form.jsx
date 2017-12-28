@@ -5,10 +5,10 @@ var TextField = require('./TextField.js');
 module.exports = createReactClass({
     getInitialState: function() {
         return {
-            clientId:"",
-            clientSecret:"",
-            authorizeEndpoint:"",
-            tokenEndpoint:""
+            clientId:this.props.clientId,
+            clientSecret:this.props.clientSecret,
+            authorizeEndpoint:this.props.authorizeEndpoint,
+            tokenEndpoint:this.props.tokenEndpoint
         }
     },
     onClientIdChange:function(e){
@@ -49,6 +49,7 @@ module.exports = createReactClass({
         }
     },
     render: function() {
+        console.log(this.state);
         return(
             <div>
                 <TextField type="text" required value={this.state.clientId} onChange={this.onClientIdChange} id="client-id-input" label="クライアントID" />

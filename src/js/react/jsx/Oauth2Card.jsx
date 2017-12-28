@@ -11,11 +11,13 @@ var ControllerAuthentication = require('./Controller_Authentication.js');
 
 module.exports = createReactClass({
   getInitialState: function() {
+    var value = ControllerAuthentication.Store.getAuthenticationValue();
+    //console.log(15, value);
       return {
-          clientId:"",
-          clientSecret:"",
-          authorizeEndpoint:"",
-          tokenEndpoint:"",
+          clientId:value.clientId,
+          clientSecret:value.clientSecret,
+          authorizeEndpoint:value.authorizeEndpoint,
+          tokenEndpoint:value.tokenEndpoint,
           scope:"any"
       }
   },
@@ -36,7 +38,7 @@ module.exports = createReactClass({
         <Card img="https://placehold.jp/150x150.png">
           <CardTitle title="Title" sub-title="Sub Title"/>
           <CardText>
-            <OAuth2Form onChange={this.onChange} />
+            <OAuth2Form onChange={this.onChange} clientId={this.state.clientId} clientSecret={this.state.clientSecret} authorizeEndpoint={this.state.authorizeEndpoint} tokenEndpoint={this.state.tokenEndpoint}/>
           </CardText>
           <CardAction>
             <CardActionButton onClick={this.onClickSubmitBtn} label="認証" />

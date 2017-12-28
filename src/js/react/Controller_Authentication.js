@@ -51,6 +51,19 @@ var myStrage = AuthStrage();
 
 
 var Store = assign({}, EventEmitter.prototype, {
+    getAuthenticationValue: function() {
+        var value = myStrage.load("authentication");
+        if (value) {
+            return value;
+        }
+        return {
+            clientId: "5BZwkNfjpbgZ1cwCXh89xyfrLf4u9T3V",
+            clientSecret: "hIceCTVKxzZ5dDijzoYQinIr",
+            authorizeEndpoint: "https://karasuma-oike-888.questetra.net/oauth2/authorize",
+            tokenEndpoint: "https://karasuma-oike-888.questetra.net/oauth2/token",
+            scope: "any"
+        }
+    },
     dispatcherIndex: dispatcher.register(function(payload) {
         switch (payload.actionType) {
             case "init":
@@ -67,7 +80,7 @@ var Store = assign({}, EventEmitter.prototype, {
                     $.ajax({
                         url: setting.tokenEndpoint,
                         type: "POST",
-                        cache : false,
+                        cache: false,
                         data: {
                             grant_type: 'authorization_code',
                             code: arg.code,
@@ -75,7 +88,7 @@ var Store = assign({}, EventEmitter.prototype, {
                         }
                     }).done(function(data) {
                         console.log(data);
-                        
+
                     }).fail(function(data) {
                         console.log(data);
                     });
