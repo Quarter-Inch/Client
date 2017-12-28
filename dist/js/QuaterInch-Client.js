@@ -19768,17 +19768,19 @@ var Store = assign({}, EventEmitter.prototype, {
                         data: {
                             grant_type: 'authorization_code',
                             code: arg.code,
-                            client_id : setting.clientId,
-                            client_secret : setting.clientSecret,
+                            client_id: setting.clientId,
+                            client_secret: setting.clientSecret,
                             redirect_uri: 'https://quarter-inch.github.io/Client/dist/index.html',
                         },
                         crossDomain: true,
-                        dataType:"json"
-                    }).done(function(data) {
-                        console.log(data);
+                        dataType: "json"
+                    }).done(function(data, textStatus, jqXHR) {
+                        console.log("done", data);
 
-                    }).fail(function(data) {
-                        console.log(data);
+                    }).fail(function(jqXHR, textStatus, errorThrown) {
+                        console.log("fail", textStatus);
+                    }).always(function(data_or_jqXHR, textStatus, jqXHR_or_errorThrown) {
+                        console.log("always", textStatus);
                     });
                 }
 
